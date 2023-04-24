@@ -17,3 +17,7 @@ async def create_user(request: UserRequestModel, database: Session) -> UserRespo
     database.refresh(user)
 
     return UserResponseModel.from_orm(user)
+
+
+async def get_user(user_id: int, database: Session) -> UserResponseModel:
+    return database.get(User, user_id)
