@@ -35,6 +35,10 @@ pip_uninstall_requirements:
 pip_freeze_requirements:
 	pip freeze > requirements.txt
 
+pip_install_only_used_requirements:
+	pip freeze | grep -v -f requirements.txt - | grep -v '^#' | xargs pip uninstall -y
+
+
 deploy_heroku_development:
 	pip freeze > requirements.txt
 	git add .
