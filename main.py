@@ -1,8 +1,9 @@
 import uvicorn
-
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.responses import RedirectResponse
+
+from api.auth import router as auth_router
 
 app = FastAPI(title="Moment", version="1.0.0")
 
@@ -29,6 +30,8 @@ async def docs():
 async def shutdown():
     print("shutdown")
 
+
+app.include_router(auth_router.router)
 
 if __name__ == '__main__':
     uvicorn.run("main:app", host="0.0.0.0", port=8080, reload=True)
