@@ -29,11 +29,14 @@ migrate:
 pip_install_requirements:
 	pip install -r requirements.txt
 
+pip_uninstall_requirements:
+	pip uninstall -r requirements.txt
+
 pip_freeze_requirements:
 	pip freeze > requirements.txt
 
 deploy_heroku_development:
 	pip freeze > requirements.txt
 	git add .
-	git commit -am "<deploy>: v7>"
+	git commit -am "<deploy>: v8>"
 	git push heroku HEAD:master
