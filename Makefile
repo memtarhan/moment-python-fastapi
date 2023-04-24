@@ -35,5 +35,5 @@ pip_freeze_requirements:
 deploy_heroku_development:
 	pip freeze > requirements.txt
 	git add .
-	git commit -am "<deploy>: v5>"
+	git commit -am "<deploy>: v6>"
 	git push heroku HEAD:master
