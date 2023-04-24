@@ -10,9 +10,6 @@ install_database:
 install_alembic:
 	pip install alembic
 
-init_alembic:
-	alembic init migrations
-
 install_jwt:
 	pip install pyjwt
 
