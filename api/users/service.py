@@ -1,23 +1,14 @@
-from fastapi.encoders import jsonable_encoder
+from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
 
-import api.auth.hashing as hashing
+from helpers.validators import validate_current_user
 from ..users.models import User
-from ..users.schema import UserRequestModel, UserResponseModel
+from ..users.schema import UserResponseModel, TokenResponse
 
 
-async def create_user(request: UserRequestModel, database: Session) -> UserResponseModel:
-    user_request = jsonable_encoder(request)
-    password = user_request["password"]
-    user_request["password"] = hashing.get_password_hash(password)
-
-    user = User(**user_request)
-    database.add(user)
-    database.commit()
-    database.refresh(user)
-
-    return UserResponseModel.from_orm(user)
-
-
-async def get_user(user_id: int, database: Session) -> UserResponseModel:
-    return database.get(User, user_id)
+async def get_user(user_id: int, database: Session, current_user: TokenResponse) -> UserResponseModel:
+    _: User = await validate_current_user(current_user=current_user, database=database)
+    user: User = database.get(User, user_id)
+    if not user:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User Not Found")
+    return user

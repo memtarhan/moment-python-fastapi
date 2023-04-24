@@ -13,3 +13,6 @@ class User(Base):
     password = Column(String(255), nullable=False)
     bio = Column(Text, nullable=True)
     profile_photo = Column(String, nullable=True)
+
+    def dict(self) -> {}:
+        return self.__dict__

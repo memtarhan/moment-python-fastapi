@@ -29,3 +29,9 @@ class UserResponseModel(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class SigninResponseModel(BaseModel):
+    access_token: str
+    token_type: str
+    profile: UserResponseModel
