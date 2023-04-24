@@ -39,6 +39,6 @@ pip_install_only_used_requirements:
 deploy_heroku_development:
 	pip freeze > requirements.txt
 	git add .
-	git commit -am "<deploy>: v22>"
+	git commit -am "<deploy>: v23>"
 	git push heroku HEAD:master
 
