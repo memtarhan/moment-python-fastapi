@@ -38,5 +38,5 @@ pip_freeze_requirements:
 deploy_heroku_development:
 	pip freeze > requirements.txt
 	git add .
-	git commit -am "<deploy>: v8>"
+	git commit -am "<deploy>: v9>"
 	git push heroku HEAD:master
