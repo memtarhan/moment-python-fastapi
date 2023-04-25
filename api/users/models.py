@@ -1,4 +1,5 @@
 from sqlalchemy import Column, BigInteger, String, Text
+from sqlalchemy.orm import relationship
 
 from ..db import Base
 
@@ -13,6 +14,8 @@ class User(Base):
     password = Column(String(255), nullable=False)
     bio = Column(Text, nullable=True)
     profile_photo = Column(String, nullable=True)
+
+    posts = relationship("PhotoPost", back_populates="creator")
 
     def dict(self) -> {}:
         return self.__dict__

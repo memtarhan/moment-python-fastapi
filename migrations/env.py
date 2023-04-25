@@ -7,6 +7,7 @@ from sqlalchemy import pool
 from api import config as config_env
 from api.db import Base
 from api.users.models import User
+from api.photos.models import PhotoPost, PhotoContentPost
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
