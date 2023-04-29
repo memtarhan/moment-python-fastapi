@@ -1,9 +1,11 @@
+import requests
 from sqlalchemy.orm import Session
 
 import api.users.models as users_models
 import api.users.schema as users_schema
 from helpers.validators import validate_current_user
 from .schema import HomeFeedResponse, HomeFeedsResponse
+from .. import config
 from ..photos.models import PhotoPost
 
 
@@ -41,3 +43,13 @@ async def get_home_feeds(page: int,
         data.append(HomeFeedResponse.parse_obj(post_data))
 
     return HomeFeedsResponse.parse_obj({'items': data})
+
+
+async def get_popular_movies(page: int):
+    url = f"{config.MOVIES_API_BASE_URL}/movie/popular?api_key={config.MOVIES_API_KEY}&language=en-US&page={page}"
+
+    response = requests.get(url)
+
+    response_json = response.json()
+    results = response_json['results']
+    return results

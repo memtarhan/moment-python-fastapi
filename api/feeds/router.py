@@ -23,4 +23,9 @@ async def get_home_feeds(page: int = 1,
     return await service.get_home_feeds(page=page, limit=limit, database=database, current_user=current_user)
 
 
+@router.get("/movies", status_code=status.HTTP_200_OK)
+async def get_home_feeds(page: int = 1):
+    return await service.get_popular_movies(page=page)
+
+
 add_pagination(router)
