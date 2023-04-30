@@ -5,7 +5,7 @@ from starlette.responses import RedirectResponse
 
 from api.auth import router as auth_router
 from api.feeds import router as feeds_router
-from api.photos import router as photos_router
+from api.snaps import router as photos_router
 from api.users import router as users_router
 
 app = FastAPI(title="Moment", version="1.0.0")

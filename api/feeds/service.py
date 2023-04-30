@@ -6,7 +6,7 @@ import api.users.schema as users_schema
 from helpers.validators import validate_current_user
 from .schema import HomeFeedResponse, HomeFeedsResponse
 from .. import config
-from ..photos.models import PhotoPost
+from ..snaps.models import Snap
 
 
 async def get_home_feeds(page: int,
@@ -14,8 +14,8 @@ async def get_home_feeds(page: int,
                          database: Session,
                          current_user: users_schema.TokenResponse):
     _: users_models.User = await validate_current_user(current_user=current_user, database=database)
-    posts: [PhotoPost] = database.query(PhotoPost) \
-        .order_by(PhotoPost.created_date.desc()) \
+    posts: [Snap] = database.query(Snap) \
+        .order_by(Snap.created_date.desc()) \
         .limit(limit) \
         .offset((page - 1) * limit) \
         .all()
@@ -26,7 +26,7 @@ async def get_home_feeds(page: int,
     # TODO: implement like & bookmark logic
     for post in posts:
         content_data = []
-        for content in post.content:
+        for content in post.contents:
             content_data.append({
                 'liked': True,
                 'likes_count': 12,
